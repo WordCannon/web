@@ -1,0 +1,8 @@
+node_modules
+npm-debug.log
+.gitignore
+README.md
+LICENSE
+.git
+
+build_and_push.sh
