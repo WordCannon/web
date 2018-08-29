@@ -9,14 +9,3 @@ services:
     restart: always
     ports:
         - 8888:8888    
-
-  cadvisor:
-    image: google/cadvisor
-    volumes:
-      - /:/rootfs:ro
-      - /var/run:/var/run:rw
-      - /sys:/sys:ro
-      - /var/lib/docker/:/var/lib/docker:ro
-    restart: always  
-    ports:
-      - 8080:8080    
