@@ -36,7 +36,7 @@ app.get('/healthz', function (req, res) {
     res.send('I am happy and healthy\n');
 });
 
-const server = app.listen(8888);
+const server = app.listen(PORT);
 
 // quit on ctrl-c when running docker in terminal
 process.on('SIGINT', function onSigint() {
