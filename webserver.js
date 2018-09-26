@@ -3,6 +3,9 @@ var app = express()
 const https = require('https');
 const fetch = require("node-fetch");
 
+const PORT = 8080;
+const HOST = '0.0.0.0';
+
 app.get('/', function (req, res) {
     res.sendFile(__dirname + '/web/index.html');
 });
@@ -57,4 +60,7 @@ function shutdown() {
         process.exit();
     })
 }
+
+console.log(`Wordcannon web server ready to receive traffic on http://${HOST}:${PORT}`);
+
 
