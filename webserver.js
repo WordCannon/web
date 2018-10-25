@@ -23,9 +23,10 @@ app.get('/getword', async function (req, res) {
     try {
 
         const response = await fetch("http://app:8080/word");
+        const status = response.status;
         const word = await response.text();
-
-        res.send(word);
+        
+        res.send(status, word);
     } catch (error) {
         console.log(error);
     }
