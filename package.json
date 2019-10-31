@@ -17,7 +17,9 @@
   },
   "homepage": "https://github.com/WordCannon/web#readme",
   "dependencies": {
+    "delay": "^4.1.0",
     "express": "^4.16.3",
-    "node-fetch": "^2.2.0"
+    "node-fetch": "^2.2.0",
+    "weighted": "^0.3.0"
   }
 }

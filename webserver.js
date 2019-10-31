@@ -2,9 +2,34 @@ var express = require('express')
 var app = express()
 const https = require('https');
 const fetch = require("node-fetch");
+const latency = require("./src/latency");
 
 const PORT = 8888;
 const HOST = '0.0.0.0';
+
+function forwardTraceHeaders(req) {
+	incoming_headers = [
+		'x-request-id',
+		'x-b3-traceid',
+		'x-b3-spanid',
+		'x-b3-parentspanid',
+		'x-b3-sampled',
+		'x-b3-flags',
+		'x-ot-span-context',
+		'x-dev-user',
+		'fail'
+	]
+	const headers = {}
+	for (let h of incoming_headers) {
+		if (req.header(h))
+			headers[h] = req.header(h)
+    }
+
+    console.log("*** Headers:");
+    console.log(JSON.stringify(headers, null, 2));
+
+	return headers
+}
 
 app.get('/', function (req, res) {
     res.sendFile(__dirname + '/web/index.html');
@@ -22,10 +47,16 @@ app.get('/getword', async function (req, res) {
 
     try {
 
-        const response = await fetch("http://app:8080/word");
+        const headers = forwardTraceHeaders(req);
+
+        await latency.randomDelay();
+
+        const response = await fetch(process.env.WORD_SERVICE_URL, {
+            headers: headers
+        });
         const status = response.status;
         const word = await response.text();
-        
+
         res.send(status, word);
     } catch (error) {
         console.log(error);
