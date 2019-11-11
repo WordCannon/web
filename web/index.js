@@ -49,7 +49,7 @@ $(document).ready(function() {
       console.log("no request in progress -- starting new fetch...");
       inProcess = true;
 
-      fetchWithTimeout("/getword", {}, 1000)
+      fetchWithTimeout("/getword", {}, 10000)
         .then(function(response) {
           if (response.ok) {
             retries = 0;
@@ -72,15 +72,13 @@ $(document).ready(function() {
             opacity: 0,
             scale: ml4.scaleOut,
             duration: ml4.durationOut,
-            easing: "easeInExpo",
+            easing: "easeInExpo"
           });
 
           animation.finished.then(() => {
-
             // update the background color
             hue += 47;
             $body.css("background-color", "hsl(" + hue + ", 100%, 50%)");
-
 
             $word.text(myWord);
 

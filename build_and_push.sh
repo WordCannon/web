@@ -1,6 +1,6 @@
 #!/bin/bash
 
-export TAG="0.0.21"
+export TAG="0.0.42"
 
 echo "TAG IS $TAG"
 
